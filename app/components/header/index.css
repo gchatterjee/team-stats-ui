@@ -1,0 +1,25 @@
+header {
+  background-color: var(--shadow-grey);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem;
+
+  img {
+    height: 8rem;
+    margin-right: 1rem;
+  }
+
+  select {
+    font-size: large;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    color: var(--white);
+    border: 1px solid var(--white);
+
+    option {
+      background-color: var(--shadow-grey);
+      padding: 0.5rem;
+    }
+  }
+}
