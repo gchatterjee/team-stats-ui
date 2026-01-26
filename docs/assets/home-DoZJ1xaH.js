@@ -1,0 +1,1 @@
+import{p as t,w as e}from"./chunk-WWGJGFF6-Ddys8Jpy.js";function n(){return t.jsx("main",{children:t.jsx("p",{children:"Hello, world!"})})}function i(){return[{title:"Team Stats | North Brooklyn Runners"},{name:"description",content:"The next iteration of the Team Stats emails"}]}const s=e(function(){return t.jsx(n,{})});export{s as default,i as meta};
