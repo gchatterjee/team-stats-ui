@@ -12,8 +12,7 @@ import type { Route } from "./+types/root";
 import "./app.css";
 import { Header } from "./components/header";
 import { EventContext } from "./context";
-import type { Loadable } from "./types";
-import type { ApiResponse, Event } from "./nyrr-api-client/types";
+import type { ApiResponse, Loadable, Event } from "./types";
 import "./ag-grid-setup";
 
 export const links: Route.LinksFunction = () => [
