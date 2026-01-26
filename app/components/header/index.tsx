@@ -2,8 +2,7 @@ import React, { useEffect } from "react";
 import { useLoadable } from "~/utils";
 import NyrrClient from "~/nyrr-api-client/client";
 import { useLocation, useNavigate } from "react-router";
-import type { ApiResponse, Event } from "~/nyrr-api-client/types";
-import type { Loadable } from "~/types";
+import type { ApiResponse, Loadable, Event } from "~/types";
 import "./index.css";
 
 interface HeaderProps {

@@ -1,4 +1,4 @@
-import { Gender, type TeamRunner } from "~/nyrr-api-client/types";
+import { Gender, type AugmentedRunnerRace, type TeamRunner } from "~/types";
 
 export type Partitioned = Partial<Record<Gender, Record<number, TeamRunner[]>>>;
 
@@ -40,4 +40,27 @@ export const formatTime = (milliseconds: number): string => {
   parts.push(seconds.toString().padStart(2, "0"));
 
   return parts.join(":");
+};
+
+export const isFirstRaceWithTeam = (
+  eventCode: string,
+  races: AugmentedRunnerRace[],
+  teamCode: string,
+) => {
+  try {
+    // we assume that the race whose eventCode is passed in was run with the team
+    const thisRace = races.find((race) => race.eventCode === eventCode);
+    if (!thisRace) return false;
+
+    // check if there are any earlier races with the same teamCode
+    return !races.some(
+      (race) =>
+        race.teamCode === teamCode &&
+        new Date(race.startDateTime).valueOf() <
+          new Date(thisRace.startDateTime).valueOf(),
+    );
+  } catch (e) {
+    console.error("Error in isFirstRaceWithTeam:", { races }, e);
+    return false;
+  }
 };

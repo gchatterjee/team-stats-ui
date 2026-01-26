@@ -4,14 +4,21 @@ import {
   getTotalFinishersForGender,
   type Partitioned,
 } from "./util";
-import { Gender } from "~/nyrr-api-client/types";
+import { Gender, type AugmentedRunnerRace } from "~/types";
 import FullResultTable from "./full-result-table";
 
 interface OverallGenderProps {
+  eventCode: string;
   results: Partitioned;
   gender: Gender;
+  runners: Record<number, AugmentedRunnerRace[]>;
 }
-export default function OverallGender({ results, gender }: OverallGenderProps) {
+export default function OverallGender({
+  eventCode,
+  results,
+  gender,
+  runners,
+}: OverallGenderProps) {
   const total = getTotalFinishersForGender(gender, results);
 
   if (total === 0) return <></>;
@@ -20,14 +27,18 @@ export default function OverallGender({ results, gender }: OverallGenderProps) {
 
   return (
     <div className="gender-finishers">
-      {Object.entries(genderResults).map(([level, runners]) => (
+      {Object.entries(genderResults).map(([level, participants]) => (
         <div key={`${gender}-${level}`}>
           <h4>
             {level === "0"
               ? `Overall ${GENDER_LABELS[gender]} (${total})`
-              : `Masters ${level}+ (${runners.length})`}
+              : `Masters ${level}+ (${participants.length})`}
           </h4>
-          <FullResultTable results={runners} />
+          <FullResultTable
+            eventCode={eventCode}
+            results={participants}
+            runners={runners}
+          />
         </div>
       ))}
     </div>

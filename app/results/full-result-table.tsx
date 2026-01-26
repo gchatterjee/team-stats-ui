@@ -1,12 +1,16 @@
 import React from "react";
 import { AgGridReact } from "ag-grid-react";
 import { type ColDef } from "ag-grid-community";
-import type { TeamRunner } from "~/nyrr-api-client/types";
 import Place from "~/components/place";
+import type { AugmentedRunnerRace, TeamRunner } from "~/types";
+import { isFirstRaceWithTeam } from "./util";
+import { TEAM_CODE } from "~/constants";
 
-const PlaceCellRenderer = (props: { value: number }) => {
-  return <Place n={props.value} ordinal={false} />;
-};
+const PlaceCellRenderer = (props: { value: number }) => (
+  <Place n={props.value} ordinal={false} />
+);
+const WelcomeCellRenderer = (props: { value: boolean }) =>
+  props.value ? <span className="welcome-symbol">👋</span> : <></>;
 const columns: ColDef<TeamRunner>[] = [
   {
     headerName: "Place Overall",
@@ -37,17 +41,38 @@ const columns: ColDef<TeamRunner>[] = [
 ];
 
 interface FullResultTableProps {
+  eventCode: string;
   results: TeamRunner[];
+  runners: Record<number, AugmentedRunnerRace[]>;
 }
 
-export default function FullResultTable({ results }: FullResultTableProps) {
+export default function FullResultTable({
+  eventCode,
+  results,
+  runners,
+}: FullResultTableProps) {
+  const firstNbrRaceColDef: ColDef<TeamRunner> = {
+    valueGetter: (params) => {
+      const runnerId = params.data?.runnerId;
+      if (runnerId === undefined) return false;
+      const runnerRaces = runners[runnerId];
+      return isFirstRaceWithTeam(eventCode, runnerRaces, TEAM_CODE);
+    },
+    cellRenderer: WelcomeCellRenderer,
+    tooltipValueGetter: (params) =>
+      params.value ? "First race with NBR!" : "",
+  };
+
+  const isLarge = results.length > 12;
+
   return (
-    <div>
+    <div className={isLarge ? "table-container-large" : "table-container"}>
       <AgGridReact
+        tooltipShowDelay={0}
         rowData={results}
-        columnDefs={columns}
+        columnDefs={[firstNbrRaceColDef, ...columns]}
         autoSizeStrategy={{ type: "fitCellContents" }}
-        domLayout="autoHeight"
+        domLayout={isLarge ? "normal" : "autoHeight"}
       />
     </div>
   );

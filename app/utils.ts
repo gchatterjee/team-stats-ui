@@ -8,6 +8,7 @@ export const useLoadable = <T>(
   const [state, setState] = React.useState<Loadable<T>>();
 
   const execute = async () => {
+    setState(undefined);
     try {
       const result = await getLoadable();
       setState(result);

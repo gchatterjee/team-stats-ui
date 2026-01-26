@@ -39,3 +39,7 @@ h4 {
     }
   }
 }
+
+.table-container-large {
+  height: 400px;
+}

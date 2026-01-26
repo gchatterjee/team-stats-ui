@@ -1,12 +1,16 @@
 import React from "react";
-import type { TeamAwardWithRunners } from "~/nyrr-api-client/client";
 import { formatTime, GENDER_LABELS } from "./util";
 import AwardTable from "./award-table";
 import Place from "~/components/place";
-import type { Loadable } from "~/types";
+import type {
+  AugmentedRunnerRace,
+  AugmentedTeamAward,
+  Loadable,
+} from "~/types";
 
 interface AwardsProps {
-  awards: Loadable<TeamAwardWithRunners[]>;
+  awards: Loadable<AugmentedTeamAward[]>;
+  runners: Loadable<Record<number, AugmentedRunnerRace[]>>;
 }
 export default function Awards({ awards }: AwardsProps) {
   if (awards === undefined)
@@ -32,7 +36,9 @@ export default function Awards({ awards }: AwardsProps) {
             ? `Open Class ${GENDER_LABELS[award.teamGender]}`
             : `Master's ${GENDER_LABELS[award.teamGender]} ${award.minimumAge}+`;
         return (
-          <div key={`${award.teamCode}-${award.teamGender}-${award.awardId}`}>
+          <div
+            key={`award-${award.teamCode}-${award.teamGender}-${award.minimumAge}`}
+          >
             <h3>{title}</h3>
             {formatTime(award.summaryTime)} -{" "}
             <Place n={award.teamOrder} ordinal={true} /> Place
