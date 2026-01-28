@@ -7,18 +7,12 @@
 }
 
 :root {
-  --shadow-grey: #1e1e24ff;
-  --white: #ffffffff;
-  --alabaster-grey: #e5e4e2ff;
-  --jungle-teal: #56876dff;
-  --lobster-pink: #d36060ff;
-
   --ag-spacing: 0.25rem;
 }
 
 html,
 body {
-  @apply bg-white dark:bg-gray-950;
+  @apply bg-white dark:bg-stone-900;
 
   @media (prefers-color-scheme: dark) {
     color-scheme: dark;

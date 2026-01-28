@@ -1,15 +1,13 @@
 import React from "react";
-import type { Event, Loadable } from "~/types";
+import type { SectionProps } from "../props";
+import Section from "../common";
 
-interface EventDetailsProps {
-  event: Loadable<Event>;
-}
-
-export default function EventDetails({ event }: EventDetailsProps) {
+export default function EventDetails({ data }: SectionProps) {
   let content;
-  if (event === undefined) content = "Loading...";
-  else if (event === null) content = "Error loading event details";
-  else
+  if (data === undefined) content = <p>Loading...</p>;
+  else if (data === null) content = <p>Error loading event details</p>;
+  else {
+    const { event } = data.document;
     content = (
       <>
         <p>
@@ -34,6 +32,11 @@ export default function EventDetails({ event }: EventDetailsProps) {
         )}
       </>
     );
+  }
 
-  return <section className="race-details">{content}</section>;
+  return (
+    <div id="event-details">
+      <Section>{content}</Section>
+    </div>
+  );
 }

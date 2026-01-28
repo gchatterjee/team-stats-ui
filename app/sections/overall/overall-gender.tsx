@@ -3,7 +3,7 @@ import {
   GENDER_LABELS,
   getTotalFinishersForGender,
   type Partitioned,
-} from "./util";
+} from "../../results/util";
 import { Gender, type AugmentedRunnerRace } from "~/types";
 import FullResultTable from "./full-result-table";
 
@@ -26,7 +26,7 @@ export default function OverallGender({
   const genderResults = results[gender]!;
 
   return (
-    <div className="gender-finishers">
+    <div className="gender-finishers bg-white dark:bg-stone-900">
       {Object.entries(genderResults).map(([level, participants]) => (
         <div key={`${gender}-${level}`}>
           <h4>

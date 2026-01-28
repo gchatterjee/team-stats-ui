@@ -33,12 +33,14 @@ export function Header({ setEvents }: HeaderProps) {
   if (events.items.length === 0) return <select disabled={true}></select>;
 
   return (
-    <header>
+    <header className="bg-stone-950 columns-2xs">
       <img
         src="https://images.squarespace-cdn.com/content/v1/5643b494e4b0cca19eae8be8/d0225f69-1b9a-4c2c-82c4-5f2b3d240170/new_nbr_logo_v2.png"
         alt="North Brooklyn Runners Logo"
+        className="aspect-6/2"
       />
       <select
+        className="bg-stone-950 text-white border-white"
         onChange={(e) => navigate(`/stats/${e.target.value}`)}
         defaultValue={getDefaultValue(location.pathname, events.items[0])}
       >

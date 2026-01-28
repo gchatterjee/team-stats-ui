@@ -1,10 +1,10 @@
 import React from "react";
-import { AgGridReact } from "ag-grid-react";
 import { type ColDef } from "ag-grid-community";
 import Place from "~/components/place";
 import type { AugmentedRunnerRace, TeamRunner } from "~/types";
-import { isFirstRaceWithTeam } from "./util";
+import { isFirstRaceWithTeam } from "../../results/util";
 import { TEAM_CODE } from "~/constants";
+import Table from "~/components/table";
 
 const PlaceCellRenderer = (props: { value: number }) => (
   <Place n={props.value} ordinal={false} />
@@ -63,17 +63,7 @@ export default function FullResultTable({
       params.value ? "First race with NBR!" : "",
   };
 
-  const isLarge = results.length > 12;
-
   return (
-    <div className={isLarge ? "table-container-large" : "table-container"}>
-      <AgGridReact
-        tooltipShowDelay={0}
-        rowData={results}
-        columnDefs={[firstNbrRaceColDef, ...columns]}
-        autoSizeStrategy={{ type: "fitCellContents" }}
-        domLayout={isLarge ? "normal" : "autoHeight"}
-      />
-    </div>
+    <Table rowData={results} columnDefs={[firstNbrRaceColDef, ...columns]} />
   );
 }

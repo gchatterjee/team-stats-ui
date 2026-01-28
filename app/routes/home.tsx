@@ -1,5 +1,4 @@
 import React from "react";
-import { Welcome } from "../welcome/welcome";
 
 export function meta() {
   return [
@@ -12,5 +11,5 @@ export function meta() {
 }
 
 export default function Home() {
-  return <Welcome />;
+  return <div>Redirecting...</div>;
 }

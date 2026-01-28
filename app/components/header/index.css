@@ -1,5 +1,4 @@
 header {
-  background-color: var(--shadow-grey);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -7,6 +6,7 @@ header {
 
   img {
     height: 8rem;
+    width: 24rem;
     margin-right: 1rem;
   }
 
@@ -14,11 +14,10 @@ header {
     font-size: large;
     padding: 0.5rem;
     border-radius: 0.5rem;
-    color: var(--white);
-    border: 1px solid var(--white);
+    border: 1px solid;
+    width: 24rem;
 
     option {
-      background-color: var(--shadow-grey);
       padding: 0.5rem;
     }
   }

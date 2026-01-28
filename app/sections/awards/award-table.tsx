@@ -1,8 +1,8 @@
 import React from "react";
-import { AgGridReact } from "ag-grid-react";
 import { type ColDef } from "ag-grid-community";
-import { formatTime } from "./util";
+import { formatTime } from "../../results/util";
 import type { TeamAwardRunner } from "~/types";
+import Table from "~/components/table";
 
 const columns: ColDef<TeamAwardRunner>[] = [
   { headerName: "First Name", field: "firstName" },
@@ -18,16 +18,5 @@ interface AwardTableProps {
   runners: TeamAwardRunner[];
 }
 export default function AwardTable({ runners }: AwardTableProps) {
-  const isLarge = runners.length > 12;
-
-  return (
-    <div className={isLarge ? "table-container-large" : "table-container"}>
-      <AgGridReact
-        rowData={runners}
-        columnDefs={columns}
-        autoSizeStrategy={{ type: "fitCellContents" }}
-        domLayout={isLarge ? "normal" : "autoHeight"}
-      />
-    </div>
-  );
+  return <Table rowData={runners} columnDefs={columns} />;
 }
