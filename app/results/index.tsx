@@ -15,6 +15,9 @@ import {
 } from "~/sections/highlights/utils";
 import { TEAM_CODE } from "~/constants";
 import PersonalRecords from "~/sections/personal-records";
+import TopTenFinishers from "~/sections/top-ten-finishers";
+import FirstRaceWithNBR from "~/sections/first-race-with-nbr";
+import FirstRaceOfDistanceWithNyrr from "~/sections/first-race-of-distance-with-nyrr";
 
 interface EventProps {
   eventCode: string;
@@ -45,21 +48,21 @@ export default function Event({ eventCode }: EventProps) {
         </section>
       )}
       <EventDetails data={data} />
-      {/* <Highlights
+      <Highlights
         data={data}
         nyrrPrSetters={nyrrPrSetters}
         firstTimeWithNBR={firstTimeWithNBR}
         topTenFinishers={topTenFinishers}
         firstRaceOfDistanceWithNyrr={firstRaceOfDistanceWithNyrr}
-      /> */}
+      />
       <Awards data={data} />
       <PersonalRecords data={data} personalRecords={nyrrPrSetters} />
-      {/* <TopTenFinishers data={data} finisherIds={topTenFinishers} />
+      <TopTenFinishers data={data} finisherIds={topTenFinishers} />
       <FirstRaceWithNBR data={data} finisherIds={firstTimeWithNBR} />
       <FirstRaceOfDistanceWithNyrr
         data={data}
         finisherIds={firstRaceOfDistanceWithNyrr}
-      /> */}
+      />
       <OverallResults data={data} />
     </div>
   );

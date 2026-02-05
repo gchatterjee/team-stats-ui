@@ -111,13 +111,7 @@ export const findDistanceFirstTimers = (data: Document): number[] => {
   return distanceFirstTimers;
 };
 
-export const findTopTenFinishers = (data: Document): number[] => {
-  const { results } = data.document;
-  const topTen: number[] = [];
-  results.items.forEach((finisher) => {
-    if (finisher.ageGradePlace <= 10) {
-      topTen.push(finisher.runnerId);
-    }
-  });
-  return topTen;
-};
+export const findTopTenFinishers = (data: Document): number[] =>
+  data.document.results.items
+    .filter((finisher) => finisher.ageGroupPlace <= 10)
+    .map((finisher) => finisher.runnerId);

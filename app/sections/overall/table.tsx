@@ -6,7 +6,7 @@ import { isFirstRaceWithTeam } from "../../results/util";
 import { TEAM_CODE } from "~/constants";
 import Table from "~/components/table";
 
-const PlaceCellRenderer = (props: { value: number }) => (
+export const PlaceCellRenderer = (props: { value: number }) => (
   <Place n={props.value} ordinal={false} />
 );
 const WelcomeCellRenderer = (props: { value: boolean }) =>

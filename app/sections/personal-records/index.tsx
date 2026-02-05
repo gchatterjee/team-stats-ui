@@ -20,6 +20,7 @@ export default function PersonalRecords({
   else if (data === null) content = <p>Error loading personal records</p>;
   else if (personalRecords === null)
     content = <p>Error loading personal records</p>;
+  else if (personalRecords.length === 0) return <></>;
   else {
     content = (
       <>

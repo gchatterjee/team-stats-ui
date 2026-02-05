@@ -1,6 +1,6 @@
 import React from "react";
 import type { SectionProps } from "../props";
-import Section from "../common";
+// import Section from "../common";
 import type { PersonalRecord } from "./types";
 import type { Loadable } from "~/types";
 
