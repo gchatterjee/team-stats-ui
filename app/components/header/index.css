@@ -1,24 +1,19 @@
 header {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
+  gap: 2rem;
   padding: 2rem;
 
-  img {
-    height: 8rem;
-    width: 24rem;
-    margin-right: 1rem;
+  .header-component {
+    max-width: 24rem;
   }
 
   select {
     font-size: large;
     padding: 0.5rem;
     border-radius: 0.5rem;
-    border: 1px solid;
-    width: 24rem;
-
-    option {
-      padding: 0.5rem;
-    }
+    width: 100%;
   }
 }

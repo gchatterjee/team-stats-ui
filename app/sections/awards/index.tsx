@@ -1,6 +1,6 @@
 import React from "react";
 import { formatTime, GENDER_LABELS } from "../../results/util";
-import AwardTable from "./award-table";
+import AwardTable from "./table";
 import Place from "~/components/place";
 import type { SectionProps } from "../props";
 import Section from "../common";

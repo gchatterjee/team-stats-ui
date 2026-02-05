@@ -6,6 +6,15 @@ import "./index.css";
 import axios from "axios";
 import type { Document } from "~/types";
 import EventDetails from "../sections/event-details";
+import Highlights from "~/sections/highlights";
+import {
+  findDistanceFirstTimers,
+  findTeamFirstTimers,
+  findNyrrPersonalRecords,
+  findTopTenFinishers,
+} from "~/sections/highlights/utils";
+import { TEAM_CODE } from "~/constants";
+import PersonalRecords from "~/sections/personal-records";
 
 interface EventProps {
   eventCode: string;
@@ -22,10 +31,35 @@ export default function Event({ eventCode }: EventProps) {
     return response.data;
   }, [eventCode]);
 
+  const firstTimeWithNBR = data && findTeamFirstTimers(data, TEAM_CODE);
+  const firstRaceOfDistanceWithNyrr = data && findDistanceFirstTimers(data);
+  const nyrrPrSetters = data && findNyrrPersonalRecords(data);
+  const topTenFinishers = data && findTopTenFinishers(data);
+
   return (
     <div className="content">
+      {data && data.document.results.totalItems > 100 && (
+        <section className="bg-red-100">
+          There is a known issue where events with over 100 runners may show
+          duplicate results, due to a bug in data processing.
+        </section>
+      )}
       <EventDetails data={data} />
+      {/* <Highlights
+        data={data}
+        nyrrPrSetters={nyrrPrSetters}
+        firstTimeWithNBR={firstTimeWithNBR}
+        topTenFinishers={topTenFinishers}
+        firstRaceOfDistanceWithNyrr={firstRaceOfDistanceWithNyrr}
+      /> */}
       <Awards data={data} />
+      <PersonalRecords data={data} personalRecords={nyrrPrSetters} />
+      {/* <TopTenFinishers data={data} finisherIds={topTenFinishers} />
+      <FirstRaceWithNBR data={data} finisherIds={firstTimeWithNBR} />
+      <FirstRaceOfDistanceWithNyrr
+        data={data}
+        finisherIds={firstRaceOfDistanceWithNyrr}
+      /> */}
       <OverallResults data={data} />
     </div>
   );

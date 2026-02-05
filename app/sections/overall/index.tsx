@@ -3,7 +3,8 @@ import { getMastersLevels, type Partitioned } from "../../results/util";
 import OverallGender from "./overall-gender";
 import { GENDERS } from "~/nyrr-api-client/client";
 import type { SectionProps } from "../props";
-import Section from "../common";
+import Section, { SECTION_BADGE_BG } from "../common";
+import CountBadge from "~/components/count-badge";
 
 export default function OverallResults({ data }: SectionProps) {
   let content;
@@ -28,7 +29,13 @@ export default function OverallResults({ data }: SectionProps) {
 
     content = (
       <>
-        <h2>Total Finishers ({results.items.length})</h2>
+        <h2>
+          Total Finishers{" "}
+          <CountBadge
+            count={results.items.length}
+            className={SECTION_BADGE_BG}
+          />
+        </h2>
         {GENDERS.map((gender) => (
           <OverallGender
             key={gender}
