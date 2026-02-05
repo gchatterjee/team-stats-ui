@@ -41,12 +41,6 @@ export default function Event({ eventCode }: EventProps) {
 
   return (
     <div className="content">
-      {data && data.document.results.totalItems > 100 && (
-        <section className="bg-red-100">
-          There is a known issue where events with over 100 runners may show
-          duplicate results, due to a bug in data processing.
-        </section>
-      )}
       <EventDetails data={data} />
       <Highlights
         data={data}
