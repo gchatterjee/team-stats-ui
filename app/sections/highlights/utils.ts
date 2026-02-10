@@ -1,4 +1,4 @@
-import type { AugmentedRunnerRace, Document } from "~/types";
+import type { AugmentedRunnerRace, Document, Event } from "~/types";
 import type { PersonalRecord } from "./types";
 
 /** Converts a time string in the format HH:MM:SS, MM:SS, or SS to seconds.
@@ -43,7 +43,19 @@ export const isBefore = (dateTimeA: string, dateTimeB: string): boolean => {
   return timeA < timeB;
 };
 
-export const findNyrrPersonalRecords = (data: Document): PersonalRecord[] => {
+export const isVirtual = (
+  race: AugmentedRunnerRace,
+  events: Event[],
+): boolean => {
+  const event = events.find((e) => e.eventCode === race.eventCode);
+  if (!event) return false;
+  return event.isVirtual;
+};
+
+export const findNyrrPersonalRecords = (
+  data: Document,
+  events: Event[],
+): PersonalRecord[] => {
   const { event, results } = data.document;
   const { items: finishers } = results;
   const { distanceName } = event;
@@ -58,6 +70,7 @@ export const findNyrrPersonalRecords = (data: Document): PersonalRecord[] => {
       (fastest: AugmentedRunnerRace | undefined, race: AugmentedRunnerRace) => {
         if (!isPr) return undefined; // already disqualified from PR consideration
         if (race.eventCode === event.eventCode) return fastest; // skip current event
+        if (isVirtual(race, events)) return fastest; // skip virtual races
         if (isBefore(race.startDateTime, event.startDateTime)) {
           if (isPr && isFaster(race.actualTime, overallTime)) {
             isPr = false; // a previous race was faster than this one
@@ -82,6 +95,7 @@ export const findNyrrPersonalRecords = (data: Document): PersonalRecord[] => {
 export const findTeamFirstTimers = (
   data: Document,
   teamCode: string,
+  events: Event[],
 ): number[] => {
   const { event, runners } = data.document;
   const teamFirstTimers: number[] = [];
@@ -89,21 +103,26 @@ export const findTeamFirstTimers = (
     const hasRacedTeamBefore = races.some(
       (race) =>
         race.teamCode === teamCode &&
-        isBefore(race.startDateTime, event.startDateTime),
+        isBefore(race.startDateTime, event.startDateTime) &&
+        !isVirtual(race, events),
     );
     if (!hasRacedTeamBefore) teamFirstTimers.push(parseInt(runnerId, 10));
   });
   return teamFirstTimers;
 };
 
-export const findDistanceFirstTimers = (data: Document): number[] => {
+export const findDistanceFirstTimers = (
+  data: Document,
+  events: Event[],
+): number[] => {
   const { event, runners } = data.document;
   const distanceFirstTimers: number[] = [];
   Object.entries(runners).forEach(([runnerId, races]) => {
     const hasRacedDistanceBefore = races.some(
       (race) =>
         race.distanceName === event.distanceName &&
-        isBefore(race.startDateTime, event.startDateTime),
+        isBefore(race.startDateTime, event.startDateTime) &&
+        !isVirtual(race, events),
     );
     if (!hasRacedDistanceBefore)
       distanceFirstTimers.push(parseInt(runnerId, 10));

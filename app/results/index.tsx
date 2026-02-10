@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import OverallResults from "../sections/overall";
 import { useLoadable } from "~/utils";
 import Awards from "../sections/awards";
@@ -18,6 +18,7 @@ import PersonalRecords from "~/sections/personal-records";
 import TopTenFinishers from "~/sections/top-ten-finishers";
 import FirstRaceWithNBR from "~/sections/first-race-with-nbr";
 import FirstRaceOfDistanceWithNyrr from "~/sections/first-race-of-distance-with-nyrr";
+import { EventContext } from "~/context";
 
 interface EventProps {
   eventCode: string;
@@ -33,11 +34,26 @@ export default function Event({ eventCode }: EventProps) {
     const response = await AXIOS_CLIENT.get<Document>(`/${eventCode}.json`);
     return response.data;
   }, [eventCode]);
+  const events = useContext(EventContext);
 
-  const firstTimeWithNBR = data && findTeamFirstTimers(data, TEAM_CODE);
-  const firstRaceOfDistanceWithNyrr = data && findDistanceFirstTimers(data);
-  const nyrrPrSetters = data && findNyrrPersonalRecords(data);
   const topTenFinishers = data && findTopTenFinishers(data);
+
+  if (data?.document.event.isVirtual)
+    return (
+      <div className="content">
+        <EventDetails data={data} />
+        <Awards data={data} />
+        <TopTenFinishers data={data} finisherIds={topTenFinishers} />
+        <OverallResults data={data} />
+      </div>
+    );
+
+  const firstTimeWithNBR =
+    data && events && findTeamFirstTimers(data, TEAM_CODE, events.items);
+  const firstRaceOfDistanceWithNyrr =
+    data && events && findDistanceFirstTimers(data, events.items);
+  const nyrrPrSetters =
+    data && events && findNyrrPersonalRecords(data, events.items);
 
   return (
     <div className="content">

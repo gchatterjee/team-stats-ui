@@ -20,14 +20,25 @@ export function Header({ setEvents }: HeaderProps) {
   const navigate = useNavigate();
   const location = useLocation();
   const events = useLoadable(client.getRecentEvents, []);
+  const [value, setValue] = React.useState("");
 
   useEffect(() => {
+    console.log({ events, "location.pathname": location.pathname });
     setEvents(events);
-    if (location.pathname === "/" && events) {
-      const [selected] = events.items;
-      navigate(`/stats/${selected.eventCode}`);
+    if (events) {
+      const [firstEvent] = events.items;
+      console.log(
+        "events loaded in header",
+        getDefaultValue(location.pathname, firstEvent),
+      );
+      setValue(getDefaultValue(location.pathname, firstEvent));
     }
   }, [events, location.pathname]);
+
+  useEffect(() => {
+    console.log({ value });
+    if (value) navigate(`/stats/${value}`);
+  }, [value]);
 
   let content;
   if (events === undefined) content = <select disabled={true}></select>;
@@ -38,8 +49,8 @@ export function Header({ setEvents }: HeaderProps) {
     content = (
       <select
         className="bg-stone-800 text-stone-200"
-        onChange={(e) => navigate(`/stats/${e.target.value}`)}
-        defaultValue={getDefaultValue(location.pathname, events.items[0])}
+        onChange={(e) => setValue(`${e.target.value}`)}
+        value={value}
       >
         {events.items.map((event) => (
           <option key={event.eventCode} value={event.eventCode}>
