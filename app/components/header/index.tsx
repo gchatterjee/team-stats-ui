@@ -23,20 +23,14 @@ export function Header({ setEvents }: HeaderProps) {
   const [value, setValue] = React.useState("");
 
   useEffect(() => {
-    console.log({ events, "location.pathname": location.pathname });
     setEvents(events);
     if (events) {
       const [firstEvent] = events.items;
-      console.log(
-        "events loaded in header",
-        getDefaultValue(location.pathname, firstEvent),
-      );
       setValue(getDefaultValue(location.pathname, firstEvent));
     }
   }, [events, location.pathname]);
 
   useEffect(() => {
-    console.log({ value });
     if (value) navigate(`/stats/${value}`);
   }, [value]);
 
