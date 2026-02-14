@@ -3,7 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "build": "react-router build && mv docs/client/* docs/ && rm -r docs/client",
+    "build": "react-router build && mv docs/client/* docs/ && rm -r docs/client && cp docs/index.html docs/404.html",
     "lint:fix": "eslint --fix . && prettier --write . && tsc --noEmit",
     "dev": "react-router dev",
     "start": "react-router-serve ./build/server/index.js",
