@@ -1,0 +1,27 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .bg-gold-gradient {
+    @apply bg-gradient-to-br
+           from-[#FFEB7F] to-[#FFC580]
+           dark:from-[#F59E0B] dark:to-[#EA580C];
+  }
+
+  .bg-blue-gradient {
+    @apply bg-gradient-to-br
+           from-[#99D4FF] to-[#7FE0D8]
+           dark:from-[#2563EB] dark:to-[#0F766E];
+  }
+
+  .bg-purple-gradient {
+    @apply bg-gradient-to-br
+           from-[#D8B5FF] to-[#9FC7FF]
+           dark:from-[#7C3AED] dark:to-[#1D4ED8];
+  }
+
+  .bg-coral-gradient {
+    @apply bg-gradient-to-br
+           from-[#FFC6C9] to-[#FF9EB3]
+           dark:from-[#E11D48] dark:to-[#BE185D];
+  }
+}

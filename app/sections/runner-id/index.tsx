@@ -15,12 +15,14 @@ export const kebabCase = (str: string): string =>
 interface RunnerIdSectionProps extends SectionProps {
   finisherIds: Loadable<number[]>;
   title: string;
+  id?: string;
   columns: ColDef<TeamRunner>[];
 }
 export default function RunnerIdSection({
   data,
   finisherIds,
   title,
+  id,
   columns,
 }: RunnerIdSectionProps) {
   let content;
@@ -47,7 +49,7 @@ export default function RunnerIdSection({
   }
 
   return (
-    <div id={kebabCase(title)}>
+    <div id={id || kebabCase(title)}>
       <Section>{content}</Section>
     </div>
   );

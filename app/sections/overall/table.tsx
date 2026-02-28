@@ -37,7 +37,7 @@ const columns: ColDef<TeamRunner>[] = [
   { headerName: "Percent (Age Graded)", field: "ageGradePercent" },
   { headerName: "City", field: "city" },
   { headerName: "State", field: "stateProvince" },
-  { headerName: "Country", field: "countryCode" },
+  { headerName: "Country", field: "iaaf" },
 ];
 
 interface FullResultTableProps {

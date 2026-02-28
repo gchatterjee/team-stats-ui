@@ -12,6 +12,7 @@
   "dependencies": {
     "@react-router/node": "7.10.1",
     "@react-router/serve": "7.10.1",
+    "@tailwindcss/line-clamp": "^0.4.4",
     "ag-grid-react": "^35.0.0",
     "axios": "^1.13.2",
     "classnames": "^2.5.1",

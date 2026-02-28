@@ -1,0 +1,18 @@
+.highlights-list {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: stretch;
+
+  a {
+    flex: 1 1 0px;
+    border-radius: 1rem;
+    padding: 1rem;
+  }
+}
+
+.highlights {
+  padding: 0 !important;
+}

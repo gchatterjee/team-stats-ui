@@ -20,6 +20,7 @@ export default function FirstRaceOfDistanceWithNyrr({
     <RunnerIdSection
       finisherIds={finisherIds}
       title={`First ${data?.document.event.distanceUnitCode} With NYRR`}
+      id="first-distance-with-nyrr"
       columns={columns}
       data={data}
     />

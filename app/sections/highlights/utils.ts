@@ -134,3 +134,24 @@ export const findTopTenFinishers = (data: Document): number[] =>
   data.document.results.items
     .filter((finisher) => finisher.ageGroupPlace <= 10)
     .map((finisher) => finisher.runnerId);
+
+export const getElement = <T>(
+  lists: T[][],
+  i: number,
+): { result: T | undefined; index: number } => {
+  let left = i;
+  let result: T | undefined = undefined;
+  let index = -1;
+  lists.forEach((list, i) => {
+    if (0 <= left && left < list.length) {
+      result = list[left];
+      index = i;
+      left = -1;
+    }
+    left -= list.length;
+  });
+  return { result, index };
+};
+
+export const randomInt = (max: number): number =>
+  Math.floor(Math.random() * max);
