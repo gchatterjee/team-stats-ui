@@ -34,7 +34,7 @@ export const parseTimeToSeconds = (time: string | undefined): number => {
 export const isFaster = (raceATime: string, raceBTime: string): boolean => {
   const timeA = parseTimeToSeconds(raceATime);
   const timeB = parseTimeToSeconds(raceBTime);
-  return timeA < timeB;
+  return timeA <= timeB;
 };
 
 export const isBefore = (dateTimeA: string, dateTimeB: string): boolean => {

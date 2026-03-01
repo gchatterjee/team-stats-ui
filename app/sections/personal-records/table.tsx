@@ -69,9 +69,8 @@ const columns: ColDef<PersonalRecord>[] = [
     },
     valueFormatter: (params) => {
       const improvementSeconds = params.value as number;
-      if (improvementSeconds > 0) {
+      if (improvementSeconds >= 0)
         return getElapsedTimeStringFromSeconds(improvementSeconds);
-      }
       return "N/A";
     },
   },
