@@ -1,0 +1,100 @@
+.oa-row {
+  .oa-top {
+    display: flex;
+    justify-content: space-between;
+
+    .oa-left {
+      display: flex;
+      align-items: center;
+      row-gap: 0.25em;
+      column-gap: 0.5em;
+
+      .oa-place-container {
+        display: flex;
+
+        .oa-place {
+          font-size: large;
+          min-width: 1lh;
+          padding: 0 0.25em;
+          display: flex;
+          justify-content: center;
+          border-radius: 0.5lh;
+        }
+      }
+
+      .oa-data {
+        display: flex;
+        column-gap: 1em;
+
+        .oa-runner-info {
+          display: flex;
+          flex-wrap: wrap;
+          flex-direction: column;
+          align-items: flex-start;
+
+          .oa-id {
+            display: flex;
+            flex-wrap: wrap;
+          }
+
+          .oa-city {
+            font-size: smaller;
+          }
+        }
+      }
+    }
+
+    .oa-right {
+      display: flex;
+      align-items: center;
+      column-gap: 0.5em;
+
+      .oa-pace-details {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+      }
+
+      .oa-expand-button {
+        font-size: initial;
+      }
+    }
+  }
+
+  .oa-bottom {
+    height: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 1em;
+    row-gap: 0.25em;
+    padding-bottom: 0.25em;
+
+    .oa-place-numeric {
+      display: flex;
+      justify-content: center;
+      min-width: 1lh;
+      padding: 0 0.25em;
+      border-radius: 0.5lh;
+    }
+
+    .oa-gender-place {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .oa-age-grade-place {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .oa-age-group-place {
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+
+  .oa-bottom.hidden {
+    display: none;
+    visibility: hidden;
+  }
+}

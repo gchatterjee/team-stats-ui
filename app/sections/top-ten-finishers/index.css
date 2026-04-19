@@ -1,0 +1,31 @@
+.t10-row {
+  display: flex;
+  justify-content: space-between;
+
+  .t10-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+
+    .t10-place-container {
+      display: flex;
+
+      .t10-place {
+        font-size: large;
+        width: 1lh;
+        display: flex;
+        justify-content: center;
+        border-radius: 0.5lh;
+      }
+    }
+
+    .t10-runner-info {
+      display: flex;
+      flex-direction: column;
+
+      .t10-age-group {
+        font-size: smaller;
+      }
+    }
+  }
+}

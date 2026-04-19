@@ -1,17 +1,18 @@
 import React from "react";
 import { getMastersLevels, type Partitioned } from "../../results/util";
-import OverallGender from "./overall-gender";
-import { GENDERS } from "~/nyrr-api-client/client";
+// import OverallGender from "./overall-gender";
+// import { GENDERS } from "~/nyrr-api-client/client";
 import type { SectionProps } from "../props";
 import Section, { SECTION_BADGE_BG } from "../common";
 import CountBadge from "~/components/count-badge";
+import Table from "./table";
 
 export default function OverallResults({ data }: SectionProps) {
   let content;
   if (data === undefined) content = <p>Loading...</p>;
   else if (data === null) content = <p>Error loading results</p>;
   else {
-    const { results, runners } = data.document;
+    const { results } = data.document;
 
     if (results.items.length === 0) return <></>;
 
@@ -36,7 +37,10 @@ export default function OverallResults({ data }: SectionProps) {
             className={SECTION_BADGE_BG}
           />
         </h2>
-        {GENDERS.map((gender) => (
+
+        <Table runners={results.items} />
+
+        {/* {GENDERS.map((gender) => (
           <OverallGender
             key={gender}
             eventCode={data.document.event.eventCode}
@@ -44,7 +48,7 @@ export default function OverallResults({ data }: SectionProps) {
             gender={gender}
             runners={runners}
           />
-        ))}
+        ))} */}
       </>
     );
   }

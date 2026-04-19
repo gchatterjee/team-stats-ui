@@ -3,8 +3,6 @@ import type { Loadable, TeamRunner } from "~/types";
 import Section, { SECTION_BADGE_BG } from "../common";
 import type { SectionProps } from "../props";
 import CountBadge from "~/components/count-badge";
-import type { ColDef } from "ag-grid-community";
-import RunnerIdTable from "./table";
 
 export const kebabCase = (str: string): string =>
   str
@@ -15,13 +13,13 @@ export const kebabCase = (str: string): string =>
 interface RunnerIdSectionProps extends SectionProps {
   finisherIds: Loadable<number[]>;
   title: string;
-  columns: ColDef<TeamRunner>[];
+  renderData: ({ runners }: { runners: TeamRunner[] }) => React.ReactNode;
 }
 export default function RunnerIdSection({
   data,
   finisherIds,
   title,
-  columns,
+  renderData,
 }: RunnerIdSectionProps) {
   let content;
 
@@ -31,17 +29,17 @@ export default function RunnerIdSection({
   else if (finisherIds === null) content = <p>Error loading {title}</p>;
   else if (finisherIds.length === 0) return <></>;
   else {
+    const { results } = data.document;
+    const runners: TeamRunner[] = finisherIds
+      .map((id) => results.items.find((runner) => runner.runnerId === id))
+      .filter((x) => x !== undefined) as TeamRunner[];
     content = (
       <>
         <h2>
           {title}{" "}
           <CountBadge count={finisherIds.length} className={SECTION_BADGE_BG} />
         </h2>
-        <RunnerIdTable
-          results={data.document.results}
-          finisherIds={finisherIds}
-          columns={columns}
-        />
+        {renderData({ runners })}
       </>
     );
   }

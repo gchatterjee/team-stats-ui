@@ -1,4 +1,5 @@
 import React from "react";
+import c from "classnames";
 import {
   GENDER_LABELS,
   getTotalFinishersForGender,
@@ -6,7 +7,7 @@ import {
 } from "../../results/util";
 import { Gender, type AugmentedRunnerRace } from "~/types";
 import FullResultTable from "./table";
-import { SECTION_BADGE_BG_SECONDARY } from "../common";
+import { SECTION_BADGE_BG_SECONDARY, SECTION_BG_SECONDARY } from "../common";
 import CountBadge from "~/components/count-badge";
 
 interface OverallGenderProps {
@@ -28,7 +29,7 @@ export default function OverallGender({
   const genderResults = results[gender]!;
 
   return (
-    <div className="gender-finishers bg-white dark:bg-stone-900">
+    <div className={c("gender-finishers", ...SECTION_BG_SECONDARY)}>
       {Object.entries(genderResults).map(([level, participants]) => (
         <div key={`finishers-${gender}-${level}`} className="level-finishers">
           <h4>

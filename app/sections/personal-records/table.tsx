@@ -1,86 +1,45 @@
 import React from "react";
-import type { PersonalRecord } from "../highlights/types";
-import { type ColDef } from "ag-grid-community";
-import Table from "~/components/table";
+import { SectionTable } from "~/components/section-rows";
+import "./index.css";
 
-const getSecondsFromTimeString = (timeStr: string): number => {
-  const parts = timeStr.split(":").map(Number);
-  let seconds = 0;
-  if (parts.length === 3) {
-    // HH:MM:SS
-    seconds += parts[0] * 3600; // hours
-    seconds += parts[1] * 60; // minutes
-    seconds += parts[2]; // seconds
-  } else if (parts.length === 2) {
-    // MM:SS
-    seconds += parts[0] * 60; // minutes
-    seconds += parts[1]; // seconds
-  } else if (parts.length === 1) {
-    // SS
-    seconds += parts[0]; // seconds
-  }
-  return seconds;
-};
-
-const getElapsedTimeStringFromSeconds = (totalSeconds: number): string => {
-  const hours = Math.floor(totalSeconds / 3600);
-  const minutes = Math.floor((totalSeconds % 3600) / 60);
-  const seconds = totalSeconds % 60;
-
-  return [
-    hours.toString().padStart(2, "0"),
-    minutes.toString().padStart(2, "0"),
-    seconds.toString().padStart(2, "0"),
-  ].join(":");
-};
-
-const columns: ColDef<PersonalRecord>[] = [
-  { headerName: "First Name", field: "finisher.firstName" },
-  { headerName: "Last Name", field: "finisher.lastName" },
-  { headerName: "PR Time", field: "finisher.overallTime" },
-  {
-    headerName: "Previous Fastest Time",
-    field: "fastestPreviousRace.actualTime",
-  },
-  {
-    headerName: "Previous Fastest Race",
-    field: "fastestPreviousRace.eventName",
-  },
-  {
-    headerName: "Date of Previous Fastest Race",
-    field: "fastestPreviousRace.startDateTime",
-    valueFormatter: (params) => {
-      const date = new Date(params.value);
-      return date.toLocaleDateString();
-    },
-  },
-  {
-    headerName: "Improvement",
-    valueGetter: (params) => {
-      const prTime = params.data?.finisher?.overallTime;
-      const previousTime = params.data?.fastestPreviousRace?.actualTime;
-      if (prTime && previousTime) {
-        const prSeconds = getSecondsFromTimeString(prTime);
-        const previousSeconds = getSecondsFromTimeString(previousTime);
-        const improvementSeconds = previousSeconds - prSeconds;
-        return improvementSeconds;
-      }
-      return 0;
-    },
-    valueFormatter: (params) => {
-      const improvementSeconds = params.value as number;
-      if (improvementSeconds >= 0)
-        return getElapsedTimeStringFromSeconds(improvementSeconds);
-      return "N/A";
-    },
-  },
-];
-
-interface PersonalRecordsTableProps {
-  personalRecords: PersonalRecord[];
+interface SortParams<T> {
+  index: number;
+  sortFn: (a: T, b: T) => number;
+  label: string;
 }
-export default function PersonalRecordsTable({
-  personalRecords,
-}: PersonalRecordsTableProps) {
-  return <Table columnDefs={columns} rowData={personalRecords} />;
+
+interface TableProps<T> {
+  rows: T[];
+  renderRow: (row: T) => React.ReactNode;
+  sort?: SortParams<T>[];
+}
+export default function Table<T>({ rows, renderRow }: TableProps<T>) {
+  // const [sortParam, setSortParam] = React.useState<SortParams>();
+  const [data] = React.useState(rows);
+
+  // useEffect(() => {
+  //   if (sortParam) {
+  //     const sortedData = [...data].sort(sortParam.sortFn);
+  //     setData(sortedData);
+  //   }
+  // }, [sortParam]);
+
+  return (
+    <div>
+      {/* {sort && (
+        <div style={{ display: "flex", gap: "1em" }}>
+          {sort.map((param) => (
+            <button key={param.index} onClick={() => setSortParam(param)}>
+              Sort by {param.label}
+            </button>
+          ))}
+        </div>
+      )} */}
+      <SectionTable>
+        {data.map((row, index) => (
+          <div key={index}>{renderRow(row)}</div>
+        ))}
+      </SectionTable>
+    </div>
+  );
 }
