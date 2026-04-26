@@ -1,0 +1,100 @@
+.section-table {
+  display: flex;
+  flex-direction: column;
+}
+
+.section-row {
+  padding: 0 0.25em;
+  border-radius: 0.25em;
+  font-size: small;
+}
+
+.section-row--space-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.section-row__left {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+}
+
+.section-row__right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.section-row__place-container,
+.section-row__gender-place-container {
+  display: flex;
+}
+
+.section-row__place {
+  font-size: large;
+  min-width: 1lh;
+  padding: 0 0.25em;
+  display: flex;
+  justify-content: center;
+  border-radius: 0.5lh;
+}
+
+.section-row__data {
+  display: flex;
+  flex-wrap: wrap;
+  column-gap: 1em;
+}
+
+.section-row__runner-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.section-row__city,
+.section-row__age-group {
+  font-size: smaller;
+}
+
+.section-row__place-alts,
+.section-row__place-group,
+.section-row__age-grade-place,
+.section-row__age-group-place {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.section-row__place-alts {
+  flex-direction: column;
+}
+
+.section-row__place-numeric {
+  display: flex;
+  justify-content: center;
+  min-width: 1lh;
+  padding: 0 0.25em;
+  border-radius: 0.5lh;
+}
+
+.section-row__top {
+  display: flex;
+  justify-content: space-between;
+  gap: 2em;
+}
+
+.section-row__top-left {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.section-row__top-right {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.section-row__content-spaced {
+  display: flex;
+  justify-content: space-between;
+}

@@ -1,0 +1,6 @@
+.award-row {
+  .award-content {
+    display: flex;
+    justify-content: space-between;
+  }
+}

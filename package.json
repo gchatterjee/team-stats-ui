@@ -12,7 +12,6 @@
   "dependencies": {
     "@react-router/node": "7.10.1",
     "@react-router/serve": "7.10.1",
-    "ag-grid-react": "^35.0.0",
     "axios": "^1.13.2",
     "classnames": "^2.5.1",
     "isbot": "^5.1.31",

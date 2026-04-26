@@ -1,0 +1,40 @@
+.tbl-control {
+  display: flex;
+  column-gap: 0.5em;
+  font-size: small;
+  flex-wrap: wrap;
+  row-gap: 0.25em;
+  align-items: center;
+
+  .tbl-control-title {
+    font-size: smaller;
+    text-transform: uppercase;
+  }
+
+  .tbl-control-element {
+    text-transform: uppercase;
+    padding: 0 0.5em;
+  }
+
+  .tbl-sort-element {
+    border-radius: 0.5lh;
+
+    .tbl-sort-arrow-hidden {
+      visibility: hidden;
+    }
+  }
+
+  .tbl-filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    column-gap: 1px;
+
+    .tbl-filter-element:first-child {
+      border-radius: 0.5lh 0 0 0.5lh;
+    }
+
+    .tbl-filter-element:last-child {
+      border-radius: 0 0.5lh 0.5lh 0;
+    }
+  }
+}

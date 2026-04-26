@@ -13,7 +13,6 @@ import "./app.css";
 import { Header } from "./components/header";
 import { EventContext } from "./context";
 import type { ApiResponse, Loadable, Event } from "./types";
-import "./ag-grid-setup";
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },

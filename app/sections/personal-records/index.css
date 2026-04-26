@@ -1,0 +1,22 @@
+.pr-row {
+  .pr-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 2em;
+
+    .pr-left {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    .pr-right {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+  }
+
+  .pr-bottom {
+    font-size: smaller;
+  }
+}

@@ -1,10 +1,10 @@
 import React from "react";
+import type { TeamRunner } from "~/types";
 import Row from "./row";
-import type { TeamAwardRunner } from "~/types";
 import { SectionTable } from "~/components/section-rows";
 
 interface Props {
-  runners: TeamAwardRunner[];
+  runners: TeamRunner[];
 }
 export default function Table({ runners }: Props) {
   return (
