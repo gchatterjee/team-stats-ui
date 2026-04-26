@@ -1,20 +1,9 @@
-import { Gender, type AugmentedRunnerRace, type TeamRunner } from "~/types";
-
-export type Partitioned = Partial<Record<Gender, Record<number, TeamRunner[]>>>;
+import { Gender, type AugmentedRunnerRace } from "~/types";
 
 export const MASTERS_LEVEL = [0, 40, 50, 60, 70, 80, 90, 100, 110, 120];
 
 export const getMastersLevels = (age: number): number[] =>
   MASTERS_LEVEL.filter((level) => level <= age);
-
-export const getTotalFinishersForGender = (
-  gender: Gender,
-  results: Partitioned,
-) => {
-  if (!results[gender]) return 0;
-  if (!results[gender]![0]) return 0;
-  return results[gender]![0]!.length;
-};
 
 export const GENDER_LABELS: Record<Gender, string> = {
   [Gender.Women]: "Women",

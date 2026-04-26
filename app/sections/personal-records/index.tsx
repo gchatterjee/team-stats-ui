@@ -1,13 +1,17 @@
 import React from "react";
 import type { PersonalRecord } from "../highlights/types";
 import type { Loadable } from "~/types";
-import Section, { SECTION_BADGE_BG } from "../common";
+import Section, {
+  getAlphabeticalSortFn,
+  getNumericalSortFn,
+  getReverseNumericalSortFn,
+  SECTION_BADGE_BG,
+} from "../common";
 import type { SectionProps } from "../props";
-// import PersonalRecordsTable from "./table";
 import CountBadge from "~/components/count-badge";
 import Row from "./row";
 import { parseTimeToSeconds } from "../highlights/utils";
-import Table from "./table";
+import Table from "../../components/table";
 
 interface PersonalRecordsProps extends SectionProps {
   personalRecords: Loadable<PersonalRecord[]>;
@@ -51,7 +55,16 @@ export default function PersonalRecords({
               improvementS: prevPrTimeS - prTimeS,
             };
           })}
-          renderRow={Row}
+          renderRow={(props, index) => <Row {...props} index={index} />}
+          sort={[
+            {
+              label: "Improvement",
+              sortFn: getReverseNumericalSortFn("improvementS"),
+            },
+            { label: "Finish Time", sortFn: getNumericalSortFn("prTimeS") },
+            { label: "Last Name", sortFn: getAlphabeticalSortFn("lastName") },
+            { label: "First Name", sortFn: getAlphabeticalSortFn("firstName") },
+          ]}
         />
       </>
     );

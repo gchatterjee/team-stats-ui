@@ -1,10 +1,17 @@
 import React, { useState } from "react";
 import c from "classnames";
 import type { TeamRunner } from "~/types";
-import { SECTION_BG, SECTION_BG_SECONDARY, SECTION_TEXT } from "../common";
+import {
+  SECTION_BG,
+  SECTION_BG_HOVER,
+  SECTION_BG_SECONDARY,
+  SECTION_BG_SECONDARY_HOVER,
+  SECTION_TEXT,
+} from "../common";
 import { Iaaf } from "~/components/iaaf";
 import { getAgeGroup } from "../top-ten-finishers/utils";
 import { SectionRow } from "~/components/section-rows";
+import "./index.css";
 
 interface Props {
   index: number;
@@ -14,9 +21,13 @@ export default function Row({ index, runner }: Props) {
   const [isCollapsed, setIsCollapsed] = useState(true);
 
   const bgInverse = index % 2 === 0 ? SECTION_BG : SECTION_BG_SECONDARY;
+  const hover = index % 2 === 0 ? SECTION_BG_SECONDARY_HOVER : SECTION_BG_HOVER;
   return (
-    <button onClick={() => setIsCollapsed((old) => !old)}>
-      <SectionRow index={index} className="oa-row">
+    <SectionRow index={index} className={c("oa-row", hover)}>
+      <button
+        className="oa-container"
+        onClick={() => setIsCollapsed((old) => !old)}
+      >
         <div className="oa-top">
           <div className="oa-left">
             <div className="oa-place-container">
@@ -71,7 +82,7 @@ export default function Row({ index, runner }: Props) {
             {getAgeGroup(runner.age).join("-")}
           </div>
         </div>
-      </SectionRow>
-    </button>
+      </button>
+    </SectionRow>
   );
 }
